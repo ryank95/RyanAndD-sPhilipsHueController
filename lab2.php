@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
+    <head>
       	<title>Lab 2</title>
       	<meta charset="utf-8">
       	<style type="text/css">
@@ -8,16 +8,16 @@
           	.visible 	{display: block;}
       	</style>
       	<script type="text/javascript">
-			var lightOn = true;
+	    var lightOn = true;
             var bri = 255;
             var authCode = "lH7nZmlzj1fMbsjzOAyrs6sO24zAsMY--IiF59vH";
             var lightID = 4;
             var urlStr = "http://130.166.45.108/api/" + authCode + "/lights/" + lightID + "/state";
             var sleepTime = 200;
-          	var brightnessChange = 25;
+            var brightnessChange = 25;
             var hueVal = 5000;
         
-        	function lightFade () {
+            function lightFade () {
               	var lightSelection =  document.getElementById("lightSelection");
               	lightID = lightSelection.options[lightSelection.selectedIndex].value;
               	hueVal = document.getElementById("hueField").value;
@@ -25,9 +25,9 @@
               	var functionToCall = funcSelection.options[funcSelection.selectedIndex].value;
               	urlStr = "http://130.166.45.108/api/" + authCode + "/lights/" + lightID + "/state";
               	console.log(lightID);
-            		console.log(urlStr);
+            	console.log(urlStr);
               	console.log(hueVal);
-            		sendAJAX(urlStr, "PUT", JSON.stringify( {"hue" : hueVal, "bri" : bri, "on" : lightOn})); 
+            	sendAJAX(urlStr, "PUT", JSON.stringify( {"hue" : hueVal, "bri" : bri, "on" : lightOn})); 
               	if(functionToCall == '1'){
                   console.log("fade executed");
                   fade();
@@ -38,8 +38,8 @@
                 }
         	}//end light fade
 			
-          	function fade(){
-              for(var totalFlicks = 0; totalFlicks < 4; totalFlicks++){
+            function fade(){
+              	for(var totalFlicks = 0; totalFlicks < 4; totalFlicks++){
                   for(var fadeOut = 0; fadeOut < 12; fadeOut++){
                     if(bri <= 0) { lightOn = false; }
                     sendAJAX(urlStr, "PUT", JSON.stringify( {"hue" : hueVal, "bri" : bri, "on" : lightOn})); 
@@ -55,7 +55,7 @@
                 }//end total flicks
             }
           
-          	function flicker(){
+            function flicker(){
               var tempOn = true;
               for(var flickerCnt = 0; flickerCnt < 200; flickerCnt++){
                 sendAJAX(urlStr, "PUT", JSON.stringify( {"hue" : hueVal, "bri" : bri, "on" : tempOn}));
@@ -84,18 +84,18 @@
             function initHandler() {
               var FadeButton = document.getElementById("fadeButton");
               var LoginButton = document.getElementById("login");
-                if(FadeButton){
-                  FadeButton.addEventListener("click", lightFade); 
-                }
-            	if(LoginButton){
-                  LoginButton.addEventListener("click", hide);
-                }  	
+              if(FadeButton){
+                FadeButton.addEventListener("click", lightFade); 
+              }
+              if(LoginButton){
+                LoginButton.addEventListener("click", hide);
+              }  	
             }//end inithandler
 
-            window.addEventListener("load", initHandler);
-		</script>
-	</head>
-  	<body>
+        window.addEventListener("load", initHandler);
+	</script>
+    </head>
+    <body>
   	<?php
     	$rootUserName = "root";
     	$databaseName = "ryan_db";
@@ -225,5 +225,5 @@
         }  
    	 	?>
     
-	</body>
+    </body>
 </html>
